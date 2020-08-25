@@ -1,0 +1,14 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h1 class="mb-5">All Products</h1>
+
+@foreach (var product in Model.Products)
+{
+    <div class="mb-5 ml-5">
+        <strong>@product.Name</strong> - <strong class="text-muted">@product.Amount.ToString("C")</strong><br />
+    </div>
+}
