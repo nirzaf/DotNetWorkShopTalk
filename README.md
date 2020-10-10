@@ -6,6 +6,7 @@ Every talk has a pdf and/or pptx with the contents of the slides. Some have a RE
 
 | Talk                                               | Where                 | When       |
 | -------------------------------------------------- | --------------------- | ---------- |
+| The Background on Background Tasks in .NET Core    | NDC Sydney            | 2020-10-14 |
 | SQL Server DevOps: Getting Started                 | Redgate Streamed      | 2020-08-26 |
 | Azure DevOps: Not Just for Devs and Ops            | DAQAA                 | 2020-01-15 |
 | SQL Server DevOps                                  | Principal Financial   | 2019-10-23 |
