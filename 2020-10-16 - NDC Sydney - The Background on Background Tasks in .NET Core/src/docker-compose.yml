@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  redis:
+    image: "redis"
+    container_name: background_tasks_demo_cache
+    ports:
+      - "6379:6379"
+  sql:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    container_name: background_tasks_demo_database
+    ports:
+      - "1234:1234"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Password#123"
+      MSSQL_TCP_PORT: "1234"
