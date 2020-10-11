@@ -7,21 +7,21 @@ using Shared;
 
 namespace BBackgroundService.Cookie
 {
-    public class CookieBackgroundService : BackgroundService
+    public class CookieCacheRefresherBackgroundService : BackgroundService
     {
-        private readonly ILogger<CookieBackgroundService> _logger;
+        private readonly ILogger<CookieCacheRefresherBackgroundService> _logger;
         private readonly ICacheService _cacheService;
 
-        public CookieBackgroundService(ILogger<CookieBackgroundService> logger, ICacheService cacheService)
+        public CookieCacheRefresherBackgroundService(ILogger<CookieCacheRefresherBackgroundService> logger, ICacheService cacheService)
         {
             _logger = logger;
             _cacheService = cacheService;
         }
-        
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             // Job starts
-            _logger.LogInformation("Starting {jobName}", nameof(CookieBackgroundService));
+            _logger.LogInformation("Starting {jobName}", nameof(CookieCacheRefresherBackgroundService));
 
             // Continue until the app shuts down
             while (!stoppingToken.IsCancellationRequested)
@@ -32,13 +32,14 @@ namespace BBackgroundService.Cookie
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Job {jobName} threw an exception", nameof(CookieBackgroundService));
+                    _logger.LogError(ex, "Job {jobName} threw an exception", nameof(CookieCacheRefresherBackgroundService));
                 }
 
                 await Task.Delay(5000);
             }
             
-            _logger.LogInformation("Stopping {jobName}", nameof(CookieBackgroundService));
+            // Job ends
+            _logger.LogInformation("Stopping {jobName}", nameof(CookieCacheRefresherBackgroundService));
             _cacheService.RemoveCookieCache();
         }
     }

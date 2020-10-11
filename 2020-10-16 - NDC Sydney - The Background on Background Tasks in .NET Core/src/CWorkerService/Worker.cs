@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
@@ -40,6 +38,7 @@ namespace CWorkerService
                 await Task.Delay(5000);
             }
             
+            // Job ends
             _logger.LogInformation("Stopping {jobName}", nameof(Worker));
             _cacheService.RemoveCookieCache();
         }

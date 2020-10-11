@@ -10,7 +10,7 @@ namespace BBackgroundService
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHostedService<CookieBackgroundService>();
+            services.AddHostedService<CookieCacheRefresherBackgroundService>();
 
             services.AddControllers();
             

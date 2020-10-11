@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,12 +20,13 @@ namespace DHangfire.Controllers
         public void Trigger()
         {
             _backgroundJobClient.Enqueue(
-                () => TriggeredFromController("Hello from the Controller!"));
+                () => TriggeredFromControllerAsync("Hello from the Controller!"));
         }
 
         [JobDisplayName("Triggered from Controller with - {0}")]
-        public void TriggeredFromController(string value)
+        public async Task TriggeredFromControllerAsync(string value)
         {
+            await Task.Delay(5000);
             Console.WriteLine(value);
         }
     }

@@ -9,12 +9,12 @@ using Shared;
 
 namespace AIHostedService.Cookie
 {
-    public class CookieHostedService : IHostedService
+    public class CookieCacheRefresherHostedService : IHostedService
     {
-        private readonly ILogger<CookieHostedService> _logger;
+        private readonly ILogger<CookieCacheRefresherHostedService> _logger;
         private readonly ICacheService _cacheService;
 
-        public CookieHostedService(ILogger<CookieHostedService> logger, ICacheService cacheService)
+        public CookieCacheRefresherHostedService(ILogger<CookieCacheRefresherHostedService> logger, ICacheService cacheService)
         {
             _logger = logger;
             _cacheService = cacheService;
@@ -22,7 +22,7 @@ namespace AIHostedService.Cookie
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Starting {jobName}", nameof(CookieHostedService));
+            _logger.LogInformation("Starting {jobName}", nameof(CookieCacheRefresherHostedService));
         
             RefreshCacheAsync(cancellationToken);
         
@@ -39,7 +39,7 @@ namespace AIHostedService.Cookie
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Job {jobName} threw an exception", nameof(CookieHostedService));
+                    _logger.LogError(ex, "Job {jobName} threw an exception", nameof(CookieCacheRefresherHostedService));
                 }
 
                 await Task.Delay(5000, stoppingToken);
@@ -48,7 +48,7 @@ namespace AIHostedService.Cookie
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Stopping {jobName}", nameof(CookieHostedService));
+            _logger.LogInformation("Stopping {jobName}", nameof(CookieCacheRefresherHostedService));
 
             // Perform any cleanup here
             _cacheService.RemoveCookieCache();

@@ -10,7 +10,7 @@ namespace AIHostedService
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHostedService<CookieHostedService>();
+            services.AddHostedService<CookieCacheRefresherHostedService>();
 
             services.AddControllers();
             

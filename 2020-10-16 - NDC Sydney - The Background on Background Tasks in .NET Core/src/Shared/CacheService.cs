@@ -39,7 +39,7 @@ namespace Shared
 
             await _cache.SetAsync(CacheKeys.Cookies, encodedCookies, new DistributedCacheEntryOptions());
 
-            _logger.LogInformation("Cache key {cacheKey} refreshed", CacheKeys.Cookies);
+            _logger.LogInformation("{cacheKey} cache refreshed", CacheKeys.Cookies);
         }
 
         public void RemoveCookieCache()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Hangfire;
 using Hangfire.SqlServer;
@@ -54,8 +55,8 @@ namespace DHangfire
                 Cron.Minutely);
 
             RecurringJob.AddOrUpdate(
-                () => JobWithName(),
-                Cron.Minutely()
+                () => JobWithNameAsync(),
+                Cron.Minutely
             );
             
             if (env.IsDevelopment())
@@ -86,8 +87,9 @@ namespace DHangfire
         }
 
         [JobDisplayName("Console Write Line Every Minute")]
-        public void JobWithName()
+        public async Task JobWithNameAsync()
         {
+            await Task.Delay(5000);
             Console.WriteLine("Named method recurring every minute!");
         }
     }
