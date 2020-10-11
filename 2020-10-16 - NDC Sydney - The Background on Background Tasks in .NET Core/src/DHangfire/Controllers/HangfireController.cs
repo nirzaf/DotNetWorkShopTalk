@@ -25,7 +25,6 @@ namespace DHangfire.Controllers
         [JobDisplayName("Triggered from Controller with - {0}")]
         public void TriggeredFromController(string value)
         {
-            throw new Exception("Error occurred");
             Console.WriteLine(value);
         }
     }
