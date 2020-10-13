@@ -20,10 +20,10 @@ namespace AIHostedService.Dashboard
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Shared.DashboardResult>> Get()
+        public async Task<DashboardResult> Get()
         {
             var encodedDashboard = await _cache.GetAsync(CacheKeys.Dashboard);
-            var dashboard = JsonSerializer.Deserialize<List<Shared.DashboardResult>>(Encoding.UTF8.GetString(encodedDashboard));
+            var dashboard = JsonSerializer.Deserialize<DashboardResult>(Encoding.UTF8.GetString(encodedDashboard));
             return dashboard;
         }
     }

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -28,11 +27,10 @@ namespace Shared
         public async Task RefreshDashboardCacheAsync()
         {
             var rng = new Random();
-            var lastUpdated = DateTime.UtcNow;
             var dashboardResult = new DashboardResult
             {
                 AverageSale = rng.Next(1, 2_000),
-                LastUpdated = lastUpdated,
+                LastUpdated = DateTime.UtcNow,
                 NumberOfSales = rng.Next(1, 10_000),
             };
             var encodedDashboard = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(dashboardResult));
