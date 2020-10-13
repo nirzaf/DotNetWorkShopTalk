@@ -5,14 +5,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Shared;
 
-namespace CWorkerService
+namespace BBackgroundService.Dashboard
 {
-    public class Worker : BackgroundService
+    public class DashboardCacheRefresherBackgroundService : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger<DashboardCacheRefresherBackgroundService> _logger;
         private readonly ICacheService _cacheService;
 
-        public Worker(ILogger<Worker> logger, ICacheService cacheService)
+        public DashboardCacheRefresherBackgroundService(ILogger<DashboardCacheRefresherBackgroundService> logger, ICacheService cacheService)
         {
             _logger = logger;
             _cacheService = cacheService;
@@ -21,7 +21,7 @@ namespace CWorkerService
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             // Job starts
-            _logger.LogInformation("Starting {jobName}", nameof(Worker));
+            _logger.LogInformation("Starting {jobName}", nameof(DashboardCacheRefresherBackgroundService));
 
             // Continue until the app shuts down
             while (!stoppingToken.IsCancellationRequested)
@@ -32,14 +32,14 @@ namespace CWorkerService
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Job {jobName} threw an exception", nameof(Worker));
+                    _logger.LogError(ex, "Job {jobName} threw an exception", nameof(DashboardCacheRefresherBackgroundService));
                 }
 
                 await Task.Delay(5000);
             }
             
             // Job ends
-            _logger.LogInformation("Stopping {jobName}", nameof(Worker));
+            _logger.LogInformation("Stopping {jobName}", nameof(DashboardCacheRefresherBackgroundService));
             _cacheService.RemoveDashboardCache();
         }
     }

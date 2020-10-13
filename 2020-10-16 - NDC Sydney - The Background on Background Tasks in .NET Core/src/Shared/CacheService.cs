@@ -10,8 +10,8 @@ namespace Shared
 {
     public interface ICacheService
     {
-        Task RefreshCookieCacheAsync();
-        void RemoveCookieCache();
+        Task RefreshDashboardCacheAsync();
+        void RemoveDashboardCache();
     }
 
     public class CacheService : ICacheService
@@ -25,26 +25,26 @@ namespace Shared
             _logger = logger;
         }
         
-        public async Task RefreshCookieCacheAsync()
+        public async Task RefreshDashboardCacheAsync()
         {
             var rng = new Random();
             var lastUpdated = DateTime.UtcNow;
-            var cookies = new List<Cookie>
+            var dashboardResult = new DashboardResult
             {
-                new Cookie {Cost = rng.Next(1, 20), Flavor = "Chocolate Chip", LastUpdated = lastUpdated},
-                new Cookie {Cost = rng.Next(1, 20), Flavor = "Sugar", LastUpdated = lastUpdated},
-                new Cookie {Cost = rng.Next(1, 20), Flavor = "Peanut Butter", LastUpdated = lastUpdated},
+                AverageSale = rng.Next(1, 2_000),
+                LastUpdated = lastUpdated,
+                NumberOfSales = rng.Next(1, 10_000),
             };
-            var encodedCookies = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(cookies));
+            var encodedDashboard = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(dashboardResult));
 
-            await _cache.SetAsync(CacheKeys.Cookies, encodedCookies, new DistributedCacheEntryOptions());
+            await _cache.SetAsync(CacheKeys.Dashboard, encodedDashboard, new DistributedCacheEntryOptions());
 
-            _logger.LogInformation("{cacheKey} cache refreshed", CacheKeys.Cookies);
+            _logger.LogInformation("{cacheKey} cache refreshed", CacheKeys.Dashboard);
         }
 
-        public void RemoveCookieCache()
+        public void RemoveDashboardCache()
         {
-            _cache.Remove(CacheKeys.Cookies);
+            _cache.Remove(CacheKeys.Dashboard);
         }
     }
 }

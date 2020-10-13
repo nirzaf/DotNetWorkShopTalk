@@ -1,4 +1,4 @@
-using AIHostedService.Cookie;
+using AIHostedService.Dashboard;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +10,7 @@ namespace AIHostedService
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHostedService<CookieCacheRefresherHostedService>();
+            services.AddHostedService<DashboardCacheRefresherHostedService>();
 
             services.AddControllers();
             

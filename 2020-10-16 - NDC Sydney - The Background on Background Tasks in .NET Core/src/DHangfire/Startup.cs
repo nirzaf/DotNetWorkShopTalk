@@ -86,7 +86,7 @@ namespace DHangfire
             });
         }
 
-        [JobDisplayName("Console Write Line Every Minute")]
+        [JobDisplayName("Custom Job Name")]
         public async Task JobWithNameAsync()
         {
             await Task.Delay(5000);

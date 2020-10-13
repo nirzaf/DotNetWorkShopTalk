@@ -7,14 +7,14 @@ using Shared;
 
 #pragma warning disable 4014
 
-namespace AIHostedService.Cookie
+namespace AIHostedService.Dashboard
 {
-    public class CookieCacheRefresherHostedService : IHostedService
+    public class DashboardCacheRefresherHostedService : IHostedService
     {
-        private readonly ILogger<CookieCacheRefresherHostedService> _logger;
+        private readonly ILogger<DashboardCacheRefresherHostedService> _logger;
         private readonly ICacheService _cacheService;
 
-        public CookieCacheRefresherHostedService(ILogger<CookieCacheRefresherHostedService> logger, ICacheService cacheService)
+        public DashboardCacheRefresherHostedService(ILogger<DashboardCacheRefresherHostedService> logger, ICacheService cacheService)
         {
             _logger = logger;
             _cacheService = cacheService;
@@ -22,7 +22,7 @@ namespace AIHostedService.Cookie
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Starting {jobName}", nameof(CookieCacheRefresherHostedService));
+            _logger.LogInformation("Starting {jobName}", nameof(DashboardCacheRefresherHostedService));
         
             RefreshCacheAsync(cancellationToken);
         
@@ -35,11 +35,11 @@ namespace AIHostedService.Cookie
             {
                 try
                 {
-                    await _cacheService.RefreshCookieCacheAsync();
+                    await _cacheService.RefreshDashboardCacheAsync();
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Job {jobName} threw an exception", nameof(CookieCacheRefresherHostedService));
+                    _logger.LogError(ex, "Job {jobName} threw an exception", nameof(DashboardCacheRefresherHostedService));
                 }
 
                 await Task.Delay(5000, stoppingToken);
@@ -48,10 +48,10 @@ namespace AIHostedService.Cookie
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Stopping {jobName}", nameof(CookieCacheRefresherHostedService));
+            _logger.LogInformation("Stopping {jobName}", nameof(DashboardCacheRefresherHostedService));
 
             // Perform any cleanup here
-            _cacheService.RemoveCookieCache();
+            _cacheService.RemoveDashboardCache();
 
             return Task.CompletedTask;
         }

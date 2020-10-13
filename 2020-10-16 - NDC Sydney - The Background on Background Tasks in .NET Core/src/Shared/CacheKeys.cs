@@ -2,6 +2,6 @@ namespace Shared
 {
     public class CacheKeys
     {
-        public static string Cookies = "Cookies";
+        public static string Dashboard = "Dashboard";
     }
 }

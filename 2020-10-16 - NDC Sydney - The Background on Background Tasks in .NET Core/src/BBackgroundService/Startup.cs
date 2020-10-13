@@ -1,4 +1,4 @@
-using BBackgroundService.Cookie;
+using BBackgroundService.Dashboard;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +10,7 @@ namespace BBackgroundService
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHostedService<CookieCacheRefresherBackgroundService>();
+            services.AddHostedService<DashboardCacheRefresherBackgroundService>();
 
             services.AddControllers();
             
