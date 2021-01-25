@@ -34,29 +34,33 @@ namespace SecurityHeadersTalk
             }
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app)
         {
-            if (_env.IsDevelopment())
-            {
-                app.UseLiveReload();
-            }
-
+            
+            
             // Hand coded but I would use a library.  In .NET - use NWebSec
             app.Use(async (context, next) =>
             {
-                context.Response.Headers.Add("x-frame-options", "DENY");
+                // context.Response.Headers.Add("x-frame-options", "DENY");
                 
                 // context.Response.Headers.Add("content-security-policy", "script-src 'self'; style-src 'none'; img-src 'self' www.google.com; media-src 'none'");
                 
-                context.Response.Headers.Add("feature-policy", "geolocation 'none'");
+                // context.Response.Headers.Add("feature-policy", "geolocation 'none'");
 
                 await next();
             });
             
             
+            
+            
+            
+            
+            
+         
             if (_env.IsDevelopment())
             {
+                app.UseLiveReload();
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -65,7 +69,6 @@ namespace SecurityHeadersTalk
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
