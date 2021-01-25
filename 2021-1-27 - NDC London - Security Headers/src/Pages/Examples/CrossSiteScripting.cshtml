@@ -1,0 +1,30 @@
+﻿@page
+@model CrossSiteScriptingModel
+@{
+    ViewData["Title"] = "CrossSiteScripting";
+}
+
+<h2>CrossSiteScripting</h2>
+
+@if (Model.Message != null)
+{
+    @* Vulnerable *@
+    <div class="alert alert-success">
+        You entered: @Html.Raw(Model.Message)
+    </div>
+
+    @*<div class="alert alert-success">
+        @Model.Message
+    </div>*@
+}
+
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Input"></label>
+        <input class="form-control" asp-for="Input" />
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary">Submit</button>
+    </div>
+</form>
