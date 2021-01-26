@@ -1,20 +1,15 @@
 ﻿@page
 @model FeaturePolicyModel
 
-<h1>
-    Your coordinates are: <span id="latitude"></span>, <span id="longitude"></span>
-</h1>
+<video autoplay id="video"></video> 
 
 <script>
-
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition((position) => {
-            const latitudeSpan = document.getElementById('latitude');
-            const longitudeSpan = document.getElementById('longitude');
-            latitudeSpan.innerText = position.coords.latitude;
-            longitudeSpan.innerText = position.coords.longitude;
-        });
-    } else {
-        alert('This browser does not support the geolocation API.');
-    }
+    navigator.mediaDevices.getUserMedia({video: true})
+    .then(stream => {
+      const video = document.querySelector("#video");
+      video.srcObject = stream;
+    })
+    .catch(error => {
+      console.error(error);
+    });
 </script>
