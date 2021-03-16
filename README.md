@@ -6,6 +6,7 @@ Every talk has a pdf and/or pptx with the contents of the slides. Some have a RE
 
 | Talk                                                    | Where                 | When       |
 | ------------------------------------------------------- | --------------------- | ---------- |
+| HTTP Security Headers You Need To Have On Your Web Apps | MDC                   | 2021-05-04 |
 | HTTP Security Headers You Need To Have On Your Web Apps | NDC London            | 2021-01-27 |
 | The Background on Background Tasks in .NET Core         | NDC Sydney            | 2020-10-14 |
 | SQL Server DevOps: Getting Started                      | Redgate Streamed      | 2020-08-26 |
