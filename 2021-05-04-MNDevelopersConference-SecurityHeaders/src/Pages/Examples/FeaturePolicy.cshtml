@@ -1,0 +1,15 @@
+﻿@page
+@model FeaturePolicyModel
+
+<video autoplay id="video"></video> 
+
+<script>
+    navigator.mediaDevices.getUserMedia({video: true})
+    .then(stream => {
+      const video = document.querySelector("#video");
+      video.srcObject = stream;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+</script>
