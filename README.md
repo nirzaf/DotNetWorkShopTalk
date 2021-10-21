@@ -6,6 +6,12 @@ Every talk has a pdf and/or pptx with the contents of the slides. Some have a RE
 
 | Talk                                                    | Where                  | When       |
 | ------------------------------------------------------- | ---------------------- | ---------- |
+| DevOps For Databases                                		| NDC London	           | 2021-01-28 |
+| HTTP Security Headers You Need To Have On Your WebApp		| CodeMash               | 2021-01-14 |
+| Evolving Legacy Code	                              		| CodeMash               | 2021-01-14 |
+| HTTP Security Headers You Need To Have On Your WebApp		| Rocket Mortgage TechCon| 2021-10-21 |
+| 10 Opinions for Maintainable .NET Apps	          	    | KCDC                   | 2021-09-17 |
+| Database Source Control with Flyway (pre-recorded)	    | Microsoft Build        | 2021-05-25 |
 | HTTP Security Headers You Need To Have On Your Web Apps | MDC                    | 2021-05-04 |
 | The Background on Background Tasks in .NET Core         | Twin Cities User Group | 2021-04-01 |
 | HTTP Security Headers You Need To Have On Your Web Apps | NDC London             | 2021-01-27 |
