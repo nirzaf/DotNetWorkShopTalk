@@ -1,36 +1,50 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using ExampleGraphQL.Server.GraphQL;
+using HotChocolate.Execution;
 
-var builder = WebApplication.CreateBuilder(args);
+var webApplicationBuilder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+ConfigureServices(webApplicationBuilder);
 
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
+Configure(webApplicationBuilder);
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+void ConfigureServices(WebApplicationBuilder builder)
 {
-    app.UseWebAssemblyDebugging();
-}
-else
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    builder.Services.AddControllers();
+    builder.Services.AddRazorPages();
+    builder.Services.AddGraphQLServer()
+        .ModifyOptions(options =>
+        {
+            options.DefaultResolverStrategy = ExecutionStrategy.Serial;
+        })
+        .AddQueryType<Query>();
 }
 
-app.UseHttpsRedirection();
+void Configure(WebApplicationBuilder builder)
+{
+    var app = builder.Build();
 
-app.UseBlazorFrameworkFiles();
-app.UseStaticFiles();
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseWebAssemblyDebugging();
+    }
+    else
+    {
+        app.UseExceptionHandler("/Error");
+        app.UseHsts();
+    }
 
-app.UseRouting();
+    app.UseHttpsRedirection();
 
+    app.MapGraphQL();
+    
+    app.UseBlazorFrameworkFiles();
+    app.UseStaticFiles();
+    
+    app.UseRouting();
+    
+    
+    app.MapControllers();
+    app.MapFallbackToFile("index.html");
 
-app.MapRazorPages();
-app.MapControllers();
-app.MapFallbackToFile("index.html");
-
-app.Run();
+    app.Run();
+}
