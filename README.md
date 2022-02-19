@@ -7,6 +7,7 @@ Every talk has a pdf and/or pptx with the contents of the slides. Some have a RE
 | Talk                                                    | Where                  | When       |
 | ------------------------------------------------------- | ---------------------- | ---------- |
 | DevOps For Databases                                    | NDC London             | 2022-05-11 |
+| The Background on Background Tasks in .NET 6            | .NET Rome Conference   | 2022-03-18 |
 | Give it a REST and try GraphQL                          | .NET Oxford            | 2022-02-15 |
 | 10 Opinions for Maintainable .NET Apps                  | Iowa .NET User Group   | 2022-02-10 |
 | HTTP Security Headers You Need To Have On Your WebApp   | RocketMortgage TechCon | 2021-10-21 |
