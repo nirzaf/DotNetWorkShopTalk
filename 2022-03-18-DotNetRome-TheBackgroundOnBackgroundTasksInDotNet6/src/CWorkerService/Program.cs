@@ -2,10 +2,10 @@ using CWorkerService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-IHost host = Host.CreateDefaultBuilder(args)
+var host = Host.CreateDefaultBuilder(args)
     .UseWindowsService() // Microsoft.Extensions.Hosting.WindowsService
     .UseSystemd() // Microsoft.Extensions.Hosting.Systemd
-    .ConfigureServices((hostContext, services) =>
+    .ConfigureServices((_, services) =>
     {
         services.AddHostedService<Worker>();
         services.AddDemoServices();

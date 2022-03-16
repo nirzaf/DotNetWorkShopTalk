@@ -1,19 +1,19 @@
 using Microsoft.Extensions.Logging;
 using Shared;
 
-namespace Microsoft.Extensions.DependencyInjection
+// ReSharper disable once CheckNamespace
+namespace Microsoft.Extensions.DependencyInjection;
+
+public static class ServiceCollectionExtensions
 {
-    public static class ServiceCollectionExtensions
+    public static void AddDemoServices(this IServiceCollection services)
     {
-        public static void AddDemoServices(this IServiceCollection services)
+        services.AddSingleton<ICacheService, CacheService>();
+        services.AddLogging(loggerConfig =>
         {
-            services.AddSingleton<ICacheService, CacheService>();
-            services.AddLogging(loggerConfig =>
-            {
-                loggerConfig.AddConsole(consoleConfig => consoleConfig.TimestampFormat = "[HH:mm:ss]");
-            });
+            loggerConfig.AddSimpleConsole(options => options.TimestampFormat = "[HH:mm:ss]");
+        });
                 
-            services.AddStackExchangeRedisCache(options => options.Configuration = "localhost:6379");
-        }
+        services.AddStackExchangeRedisCache(options => options.Configuration = "localhost:6379");
     }
 }

@@ -7,53 +7,52 @@ using Shared;
 
 #pragma warning disable 4014
 
-namespace AIHostedService.Dashboard
+namespace AIHostedService.Dashboard;
+
+public class DashboardCacheRefresherHostedService : IHostedService
 {
-    public class DashboardCacheRefresherHostedService : IHostedService
+    private readonly ILogger<DashboardCacheRefresherHostedService> _logger;
+    private readonly ICacheService _cacheService;
+
+    public DashboardCacheRefresherHostedService(ILogger<DashboardCacheRefresherHostedService> logger, ICacheService cacheService)
     {
-        private readonly ILogger<DashboardCacheRefresherHostedService> _logger;
-        private readonly ICacheService _cacheService;
+        _logger = logger;
+        _cacheService = cacheService;
+    }
 
-        public DashboardCacheRefresherHostedService(ILogger<DashboardCacheRefresherHostedService> logger, ICacheService cacheService)
-        {
-            _logger = logger;
-            _cacheService = cacheService;
-        }
-
-        public Task StartAsync(CancellationToken cancellationToken)
-        {
-            _logger.LogInformation("Starting {jobName}", nameof(DashboardCacheRefresherHostedService));
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Starting {jobName}", nameof(DashboardCacheRefresherHostedService));
         
-            RefreshCacheAsync(cancellationToken);
+        RefreshCacheAsync(cancellationToken);
         
-            return Task.CompletedTask;
-        }
+        return Task.CompletedTask;
+    }
         
-        private async Task RefreshCacheAsync(CancellationToken stoppingToken)
+    private async Task RefreshCacheAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            try
             {
-                try
-                {
-                    await _cacheService.RefreshDashboardCacheAsync();
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Job {jobName} threw an exception", nameof(DashboardCacheRefresherHostedService));
-                }
-
-                await Task.Delay(5000, stoppingToken);
+                await _cacheService.RefreshDashboardCacheAsync();
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Job {jobName} threw an exception", nameof(DashboardCacheRefresherHostedService));
+            }
+
+            await Task.Delay(5000, stoppingToken);
         }
+    }
 
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            _logger.LogInformation("Stopping {jobName}", nameof(DashboardCacheRefresherHostedService));
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Stopping {jobName}", nameof(DashboardCacheRefresherHostedService));
 
-            // Perform any cleanup here
-            _cacheService.RemoveDashboardCache();
+        // Perform any cleanup here
+        _cacheService.RemoveDashboardCache();
 
-            return Task.CompletedTask;
-        }
+        return Task.CompletedTask;
     }
 }

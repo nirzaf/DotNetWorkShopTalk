@@ -1,7 +1,6 @@
-namespace Shared
+namespace Shared;
+
+public static class CacheKeys
 {
-    public class CacheKeys
-    {
-        public static string Dashboard = "Dashboard";
-    }
+    public const string Dashboard = "Dashboard";
 }
