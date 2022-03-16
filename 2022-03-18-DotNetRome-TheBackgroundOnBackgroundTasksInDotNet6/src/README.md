@@ -1,0 +1,1 @@
+`docker-compose up` to bring up Redis and SQL Server
