@@ -63,7 +63,7 @@ namespace DHangfire
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
+    
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
