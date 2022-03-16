@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 // ReSharper disable MemberCanBePrivate.Global
