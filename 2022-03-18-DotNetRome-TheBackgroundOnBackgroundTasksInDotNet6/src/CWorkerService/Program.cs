@@ -1,28 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CWorkerService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-// ReSharper disable MemberCanBePrivate.Global
 
-namespace CWorkerService
-{
-    public class Program
+IHost host = Host.CreateDefaultBuilder(args)
+    .UseWindowsService() // Microsoft.Extensions.Hosting.WindowsService
+    .UseSystemd() // Microsoft.Extensions.Hosting.Systemd
+    .ConfigureServices((hostContext, services) =>
     {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .UseWindowsService() // Microsoft.Extensions.Hosting.WindowsService
-                .UseSystemd() // Microsoft.Extensions.Hosting.Systemd
-                .ConfigureServices((hostContext, services) =>
-                {
-                    services.AddHostedService<Worker>();
-                    services.AddDemoServices();
-                });
-    }
-}
+        services.AddHostedService<Worker>();
+        services.AddDemoServices();
+    })
+    .Build();
+    
+await host.RunAsync();
