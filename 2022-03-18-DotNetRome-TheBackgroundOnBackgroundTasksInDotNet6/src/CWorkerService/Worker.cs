@@ -1,8 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Shared;
 
 namespace CWorkerService;
@@ -35,7 +30,7 @@ public class Worker : BackgroundService
                 _logger.LogError(ex, "Job {jobName} threw an exception", nameof(Worker));
             }
 
-            await Task.Delay(5000, stoppingToken);
+            await Task.Delay(5000);
         }
             
         // Job ends

@@ -12,7 +12,7 @@ public class DashboardCacheRefresherBackgroundService : BackgroundService
         _logger = logger;
         _cacheService = cacheService;
     }
-        
+   
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         // Job starts
@@ -30,7 +30,7 @@ public class DashboardCacheRefresherBackgroundService : BackgroundService
                 _logger.LogError(ex, "Job {jobName} threw an exception", nameof(DashboardCacheRefresherBackgroundService));
             }
 
-            await Task.Delay(5000, stoppingToken);
+            await Task.Delay(5000);
         }
             
         // Job ends
