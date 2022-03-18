@@ -18,7 +18,7 @@ public class DashboardController : Controller
     }
 
     [HttpGet]
-    public async Task<DashboardResult> Get()
+    public async Task<DashboardResult?> Get()
     {
         var encodedDashboard = await _cache.GetAsync(CacheKeys.Dashboard);
         var dashboard = JsonSerializer.Deserialize<DashboardResult>(Encoding.UTF8.GetString(encodedDashboard));

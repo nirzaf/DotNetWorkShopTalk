@@ -24,7 +24,7 @@ public class CacheService : ICacheService
         
     public async Task RefreshDashboardCacheAsync()
     {
-        var rng = new Random();
+        var rng = Random.Shared;
         var dashboardResult = new DashboardResult
         {
             AverageSale = rng.Next(1, 2_000),

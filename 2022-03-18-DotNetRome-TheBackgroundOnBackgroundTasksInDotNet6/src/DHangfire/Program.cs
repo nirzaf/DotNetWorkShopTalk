@@ -44,7 +44,7 @@ RecurringJob.AddOrUpdate(
     Cron.Minutely);
 
 RecurringJob.AddOrUpdate(
-    () => app.Services.GetService<IJobService>().JobWithNameAsync(),
+    () => app.Services.GetRequiredService<IJobService>().JobWithNameAsync(),
     Cron.Minutely
 );
 
