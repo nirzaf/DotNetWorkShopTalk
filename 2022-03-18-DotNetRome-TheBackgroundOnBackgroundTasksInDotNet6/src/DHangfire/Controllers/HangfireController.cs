@@ -1,6 +1,6 @@
+// ReSharper disable All
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
-// ReSharper disable MemberCanBePrivate.Global
 
 namespace DHangfire.Controllers;
 
