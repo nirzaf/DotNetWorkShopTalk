@@ -30,7 +30,7 @@ public class Worker : BackgroundService
                 _logger.LogError(ex, "Job {jobName} threw an exception", nameof(Worker));
             }
 
-            await Task.Delay(5000);
+            await Task.Delay(5000, stoppingToken);
         }
             
         // Job ends
